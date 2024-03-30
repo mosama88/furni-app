@@ -18,14 +18,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
-Route::controller(ThemeController::class)->name('front.')->group(function(){
+require __DIR__.'/auth.php';
+Route::middleware('auth')->controller(ThemeController::class)->name('front.')->group(function(){
     Route::get('/about','about')->name('about');
     Route::get('/services','services')->name('services');
     Route::get('/contact','contact')->name('contact');
     Route::get('/displayContact','display')->name('displayContact');
     Route::post('/contact/store','store')->name('contact.store');
 });
-
-
-require __DIR__.'/auth.php';
